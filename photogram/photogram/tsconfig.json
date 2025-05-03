@@ -19,6 +19,7 @@
         "./src/*"
       ]
     },
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["@uploadcare/file-uploader/types/jsx"]
   }
 }

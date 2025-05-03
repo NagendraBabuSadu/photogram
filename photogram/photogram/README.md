@@ -1,54 +1,129 @@
-# React + TypeScript + Vite
+# PhotoGram - Social Media Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern social media platform built using React (React, Google Firebase). This application allows users to create profiles, post updates, follow other users, like and comment on posts, and engage in real-time messaging.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Features
+- Technologies
+- Installation
+- Usage
+- Project Structure
+- Environment Variables
+- Contributing
+- License
 
-## Expanding the ESLint configuration
+### Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+User authentication (register, login, logout) with Google Firebase
+Create, edit, and delete posts
+Like and comment on posts
+Follow/unfollow users
+Real-time chat using Socket.IO
+User profile management (bio, profile picture)
+Responsive design for mobile and desktop
+News feed with posts from followed users
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
+### Technologies
+
+Frontend: React, Tailwind CSS, Redux Toolkit, FileUploader, shadCN
+Backend: Google Firebase
+Database: Google Firebase
+Real-time Communication: Socket.IO
+Authentication: JSON Web Tokens (JWT)
+File Storage: Multer (for profile pictures and post images)
+Deployment: (e.g., Vercel for frontend, Render/Heroku for backend, MongoDB Atlas for database)
+
+### Installation
+
+Clone the repository:
+git clone https://github.com/NagendraBabuSadu/photogram/tree/main/photogram
+
+#### Install dependencies:
+- For the Application: `npm create vite@latest`
+
+- For the Tailwind CSS: `npm install tailwindcss @tailwindcss/vite`
+
+- For the frontend:cd frontend `npm install`
+
+- Configure environment variables (see Environment Variables).
+
+- Run the application: Start the frontend: `npm run dev`
+
+- File Uploader: `npm i @uploadcare/react-uploader`
+
+- #### ShadCN 
+- ShadCN: components.json
+`{
+  "style": "default",
+  "tailwind": {
+    "config": "tailwind.config.js",
+    "css": "src/app/globals.css",
+    "baseColor": "zinc",
+    "cssVariables": true
   },
-})
-```
+  "rsc": false,
+  "tsx": false,
+  "aliases": {
+    "utils": "~/lib/utils",
+    "components": "~/components"
+  }
+}`
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- ShadCN: jsconfig.json
+`{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}
+`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+Open http://localhost:3000 in your browser to view the application.
+
+### Usage
+
+Register a new account or log in with existing credentials.
+Update your profile with a bio and profile picture.
+Create posts with text and images.
+Follow other users to see their posts in your feed.
+Like and comment on posts.
+Use the chat feature to send real-time messages to other users.
+
+### Project Structure
+social-media-app/
+
+├── frontend/                  
+│   ├── src/
+│   │   ├── components/        
+│   │   ├── pages/             
+│   │   ├── redux/              
+│   │   ├── assets/             
+│   │   └── App.js              
+└── README.md                   
+
+### Environment Variables
+Create a .env file in the frontend with the following variables:
+- VITE_APIKEY
+- VITE_AUTHDOMAIN
+- VITE_PROJECTID
+- VITE_STORAGEBUCKET
+- VITE_MESSAGINGSENDERID
+- VITE_APPID
+- PORT=5000
+
+
+
+
+### Contributing
+
+Fork the repository.
+- Create a new branch (`git checkout -b feature/your-feature`).
+- Make your changes and commit (`git commit -m "Add your feature`).
+- Push to the branch (`git push origin feature/your-feature`).
+- Open a pull request.
+
+### License
+This project is licensed under the MIT License.
