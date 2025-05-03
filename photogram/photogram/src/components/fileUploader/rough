@@ -1,0 +1,77 @@
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { OutputFileEntry } from '@uploadcare/file-uploader';
+import { FileUploaderRegular, type UploadCtxProvider } from '@uploadcare/react-uploader';
+import { FileEntry } from '@/types';
+
+
+import '@uploadcare/react-uploader/core.css';
+
+
+type FileUploaderProps = {
+    uploaderClassName: string;
+    fileEntry: FileEntry;
+    onChange: (files: OutputFileEntry[]) => void;
+
+}
+
+
+export default function FileUploader({ fileEntry, uploaderClassName, onChange }: FileUploaderProps) {
+    const [uploadedFiles, setUploadedFiles] = useState<OutputFileEntry<'success'>[]>([]);
+    const ctxProviderRef = useRef<InstanceType<UploadCtxProvider>>(null);
+
+
+    const handleRemoveClick = useCallback(
+        (uuid: OutputFileEntry['uuid']) => onChange(fileEntry.files.filter(f => f.uuid !== uuid)),
+        [fileEntry, onChange],
+    );
+
+    const resetUploaderState = () => ctxProviderRef.current?.uploadCollection.clearAll();
+
+    const handleModalCloseEvent = () => {
+        resetUploaderState();
+
+        onChange([...fileEntry, ...uploadedFiles])
+
+        setUploadedFiles([]);
+    };
+
+
+    const handleChangeEvent = (fileEntry: FileEntry) => {
+        setUploadedFiles([...fileEntry.files.filter(f => f.status === 'success')] as OutputFileEntry<'success'>[]);
+    }
+
+    return (
+        <div>
+            <FileUploaderRegular
+                imgOnly
+                multiple
+                removeCopyright
+                confirmUpload={false}
+                apiRef={ctxProviderRef}
+                onChange={() => handleChangeEvent}
+                pubkey="40d95b48c8f0297919a5"
+
+            />
+            <div>
+                {fileEntry.files.map((file) => (
+                    <div key={file.uuid} >
+                        <img
+
+                            key={file.uuid}
+                            src={`${file.cdnUrl}/-/preview/-/resize/x200/`}
+                            width="7"
+
+                        />
+
+                        <button
+
+                            type="button"
+                            onClick={() => handleRemoveClick(file.uuid)}
+                        >×
+                        </button>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}

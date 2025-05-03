@@ -1,10 +1,16 @@
+import Layout from '@/components/layout';
 import * as React from 'react';
 
 interface IMyPhotosProps {
 }
 
 const MyPhotos: React.FunctionComponent<IMyPhotosProps> = (props) => {
-  return <div>My Photos</div>
+  return (
+    <Layout >
+      <div className='flex text-black w-screen h-screen'>
+        My Photos
+      </div>
+    </Layout>)
 };
 
 export default MyPhotos;
