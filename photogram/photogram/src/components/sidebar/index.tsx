@@ -27,12 +27,12 @@ const navItems = [
     },
     {
         name: "Post",
-        link: "#",
+        link: "/post",
         icon: addIcon
     },
     {
         name: "Profile",
-        link: "#",
+        link: "/profile",
         icon: settingsIcon
     },
     {
@@ -91,7 +91,7 @@ const Sidebar: React.FunctionComponent<ISidebarProps> = () => {
                     "flex items-center gap-2 p-2 justify-start ",
                     location.pathname === "/login"
                         ? "bg-white text-black rounded-none "
-                        : "bg-transparent hover:bg-gray-400 rounded-none"
+                        : "bg-transparent rounded-none"
                 )}
 
             >
