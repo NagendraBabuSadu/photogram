@@ -8,12 +8,12 @@ interface IProfileProps {
 }
 
 const Profile: React.FunctionComponent<IProfileProps> = () => {
-  const {user} = useUserAuth();
+  const { user } = useUserAuth();
   const initialUserInfo: ProfileResponse = {
     userId: user?.uid,
-    id: "", 
+    id: "",
     displayName: user?.displayName ? user?.displayName : "Guest_user",
-    photoURL: user?.photoURL ? user?.photoURL : "", 
+    photoURL: user?.photoURL ? user?.photoURL : "",
     userBio: "Please update your bio..."
 
   }
@@ -22,7 +22,7 @@ const Profile: React.FunctionComponent<IProfileProps> = () => {
 
 
 
-  return  (
+  return (
     <Layout >
       <div className='flex justify-center h-screen'>
         <div className="border max-w-3xl w-screen">
