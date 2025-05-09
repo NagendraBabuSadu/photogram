@@ -4,13 +4,16 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useUserAuth } from '@/context/userAuthContext';
-import { FileEntry, Post } from '@/types';
+import { createPost } from '@/repository/post.service';
+import { FileEntry, PhotoMeta, Post } from '@/types';
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface ICreatePostProps { }
 
 const CreatePost: React.FC<ICreatePostProps> = () => {
   const { user } = useUserAuth();
+  const navigate = useNavigate();
 
   const [fileEntry, setFileEntry] = React.useState<FileEntry>({
     files: []
@@ -26,19 +29,29 @@ const CreatePost: React.FC<ICreatePostProps> = () => {
     date: new Date()
   });
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('FileEntry: ', fileEntry);
     console.log('Post: ', post);
-    // TODO: Implement post submission logic
 
-    if (fileEntry.files.length === 0) {
-      console.warn("No files uploaded");
-      return;
+    const photoMeta: PhotoMeta[] = fileEntry.files.map((file) => {
+      return {
+        cdnUrl: file.cdnUrl,
+        uuid: file.uuid
+      }
+    })
+    if (user != null) {
+      const newPost: Post = {
+        ...post,
+        userId: user?.uid || null,
+        photos: photoMeta
+      }
+      console.log("new Post is: ", newPost);
+      await createPost(newPost);
+      navigate("/")
+    } else {
+      navigate("login")
     }
-
-   
-
   };
 
   return (

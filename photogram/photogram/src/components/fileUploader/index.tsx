@@ -52,7 +52,6 @@ export default function FileUploader({ fileEntry, onChange }: FileUploaderProps)
                 uuid: entry.uuid,
             })) as OutputFileEntry<'success'>[];
 
-        // Append instead of replace
         setUploadedFiles(successful);
         onChange(successful);
     }, [fileEntry]);
