@@ -1,4 +1,4 @@
-import { DocumentResponse, Post } from "@/types";
+import { DocumentResponse, Post, ProfileInfo } from "@/types";
 import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc, where } from "firebase/firestore";
 import { db } from "../../firebaseConfig"; // adjust path based on actual location
 
@@ -48,7 +48,29 @@ export const deletePost = async (id: string) => {
 export const updateLikesOnPost = async (id: string, userLikes: string[], likes: number) => {
     const docRef = doc(db, COLLECTION_NAME, id);
     return updateDoc(docRef, {
-        userLikes : userLikes, 
+        userLikes: userLikes,
         likes: likes
     })
+}
+
+export const updatedPostsWithUserInfo = async (userProfile: ProfileInfo) => {
+    const q = query(collection(db, COLLECTION_NAME), where("userId", "==", userProfile.user?.uid));
+    console.log("the updated Posts Profile Info", q)
+    const querySnapshot = await getDocs(q);
+    console.log("querySnapshot: ", querySnapshot);
+    if (querySnapshot.size > 0) {
+        querySnapshot.forEach((document) => {
+            const docRef = doc(db, COLLECTION_NAME, document.id);
+            updateDoc(docRef, {
+                username: userProfile.displayName,
+                photoURL: userProfile.photoURL
+            })
+
+        })
+    } else {
+        console.log(
+            "The user doesn't have any posts."
+        )
+    }
+
 }
