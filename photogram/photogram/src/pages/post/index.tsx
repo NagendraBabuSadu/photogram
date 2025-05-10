@@ -19,7 +19,6 @@ const CreatePost: React.FC<ICreatePostProps> = () => {
     files: []
   });
 
-
   const [post, setPost] = React.useState<Post>({
     caption: '',
     photos: [],
@@ -36,15 +35,17 @@ const CreatePost: React.FC<ICreatePostProps> = () => {
 
     const photoMeta: PhotoMeta[] = fileEntry.files.map((file) => {
       return {
-        cdnUrl: file.cdnUrl,
-        uuid: file.uuid
+        cdnUrl: file.cdnUrl!,
+        uuid: file.uuid!
       }
     })
     if (user != null) {
       const newPost: Post = {
         ...post,
-        userId: user?.uid || null,
-        photos: photoMeta
+        userId: user?.uid,
+        photos: photoMeta, 
+        username: user?.displayName!,
+        photoURL: user?.photoURL!
       }
       console.log("new Post is: ", newPost);
       await createPost(newPost);
@@ -54,9 +55,11 @@ const CreatePost: React.FC<ICreatePostProps> = () => {
     }
   };
 
+
+
   return (
     <Layout>
-      <div className="flex justify-center text-black">
+      <div className="flex h-screen text-black">
         <div className="border mx-auto max-w-3xl w-full">
           <div className="bg-slate-800 text-white text-center text-lg p-2">
             <h3>Create a Post</h3>
