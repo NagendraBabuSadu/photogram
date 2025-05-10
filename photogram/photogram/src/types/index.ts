@@ -8,8 +8,8 @@ export interface UserLogin {
 
 export interface UserSignup {
     email: string,
-    password: string, 
-    confirmPassword: string, 
+    password: string,
+    confirmPassword: string,
 }
 
 export interface FileEntry {
@@ -17,48 +17,54 @@ export interface FileEntry {
 }
 
 export interface Post {
-    caption: string, 
+    caption: string,
     photos: PhotoMeta[],
-    likes: number, 
+    likes: number,
     userLikes: [],
     userId: string | null,
-    date: Date
+    date: Date,
+    username?: string,
+    photoURL?: string
 }
 
 export interface PhotoMeta {
-    cdnUrl: string | null, 
+    cdnUrl: string | null,
     uuid: string
 }
 
 
 export interface DocumentResponse {
-    id?: string, 
-    caption?: string, 
+    id?: string,
+    caption?: string,
     photos?: PhotoMeta[],
-    likes?: number, 
+    likes?: number,
     userLikes?: [],
     userId?: string | null,
-    date?: Date
+    date?: Date,
+    username?: string,
+    photoURL?: string
 }
 
 
 export interface ProfileInfo {
-    user?: User, 
-    displayName?: string, 
+    user?: User,
+    displayName?: string,
     photoURL?: string
 }
 
 export interface UserProfile {
     userId?: string,
-    displayName?: string, 
-    photoURL?: string, 
+    displayName?: string,
+    photoURL?: string,
     userBio?: string
 }
+
 export interface ProfileResponse {
     id?: string,
     userId?: string,
-    displayName?: string, 
-    photoURL?: string, 
-    userBio?: string
-   
+    displayName?: string,
+    photoURL?: string,
+    userBio?: string,
+    email?: string
+
 }

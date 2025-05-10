@@ -9,7 +9,7 @@ interface IStoriesProps {
 
 const Stories: React.FunctionComponent<IStoriesProps> = (props) => {
   return (
-    <div className='container flex justify-between'>
+    <div className='container flex justify-between sticky top-0 scrollbar-hidden'>
         <img src={image1} alt="" className='w-20 h-20 rounded-full border-4 border-slate-800' />
         <img src={image2} alt="" className='w-20 h-20 rounded-full border-4 border-slate-800' />
         <img src={image3} alt="" className='w-20 h-20 rounded-full border-4 border-slate-800' />
