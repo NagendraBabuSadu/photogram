@@ -10,7 +10,6 @@ export const createPost = async (post: Post) => {
 
 export const getPosts = async () => {
     try {
-
         const q = query(collection(db, COLLECTION_NAME), orderBy("date", "desc"));
         const querySnapshot = await getDocs(q);
         const tempArr: DocumentResponse[] = [];
@@ -38,7 +37,7 @@ export const getPostByUserId = async (id: string) => {
 }
 
 export const getPost = async (id: string) => {
-    const docRef = doc(db, COLLECTION_NAME, id);
+    const docRef = doc(db, COLLECTION_NAME, id) ;
     return await getDocs(docRef);
 }
 export const deletePost = async (id: string) => {
@@ -72,5 +71,4 @@ export const updatedPostsWithUserInfo = async (userProfile: ProfileInfo) => {
             "The user doesn't have any posts."
         )
     }
-
 }
