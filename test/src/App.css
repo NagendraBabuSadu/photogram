@@ -1,0 +1,76 @@
+body {
+  font-family: sans-serif;
+}
+
+.title {
+  font-weight: 800;
+  font-size: 30px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: "bg-slate-900";
+}
+
+.container > form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.container > form > button {
+  cursor: pointer;
+  padding: 8px;
+  font-size: 15px;
+  border: none;
+  background-color: rgb(37, 37, 37);
+  text-transform: uppercase;
+  color: white;
+  border-radius: 5px;
+}
+.container >form > .tagsData{
+  display: flex;
+  row-gap: 10px;
+  justify-content: space-around;
+}
+.postbox {
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: none;
+  border-bottom: 2px solid rgb(102, 98, 98);
+}
+
+.tags {
+  display: flex;
+  justify-content: space-around;
+    background-color: #fefefe;
+}
+
+.post {
+  display: flex;
+  align-items: center;
+  gap: 5;
+  background-color: #eae7e7;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.post > span {
+    display: flex;
+  background: #757575;
+  padding: 2px 8px 4px 8px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.pages {
+  justify-content: center;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}

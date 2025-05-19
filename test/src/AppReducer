@@ -1,0 +1,44 @@
+import  { useReducer, memo } from "react";
+import { reducer, initialState } from "./reducer"
+
+interface TodoProps {
+  todos: string[];
+  addTodo: () => void;
+}
+
+const Todo = memo(({ todos, addTodo }: TodoProps) => {
+  return (
+    <>
+      <h2>My Todos</h2>
+      {todos.map((todo, index) => (
+        <p key={index}>{todo}</p>
+      ))}
+      <button onClick={addTodo}>Add Todo</button>
+    </>
+  );
+});
+
+function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const addTodo = () => {
+    dispatch({ type: "add_todo" });
+  };
+  const increment = () => {
+    dispatch({ type: "increment" });
+  };
+
+  return (
+    <>
+      <Todo todos={state.todos} addTodo={addTodo} />
+      <hr />
+      <div>
+        Count: {state.count}
+        <button onClick={increment}>Click</button>
+      </div>
+    </>
+  );
+}
+
+export default App;
+

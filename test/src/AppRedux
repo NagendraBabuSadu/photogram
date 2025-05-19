@@ -1,0 +1,59 @@
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useAppDispatch, type RootState } from "./store/store";
+import { addTodo, increment } from "./store/appSlice";
+
+interface TodoProps {
+  todos: string[];
+  addTodo: (newTodo: string) => void;
+}
+
+const Todo = ({ todos, addTodo }: TodoProps) => {
+  const [newTodo, setNewTodo] = useState("");
+
+  const handleTodo = () => {
+    if (newTodo.trim()) {
+      addTodo(newTodo);
+      setNewTodo("");
+    }
+  };
+
+  return (
+    <>
+      <input
+        type="text"
+        value={newTodo}
+        onChange={(e) => setNewTodo(e.target.value)}
+        placeholder="Enter something"
+      />
+
+      <button onClick={handleTodo}>Add Todo</button>
+
+      {todos.map((todo, index) => {
+        return (
+          <div key={index}>
+            <p>{todo}</p>
+          </div>
+        );
+      })}
+    </>
+  );
+};
+
+const App = () => {
+  const dispatch = useAppDispatch();
+  const counter = useSelector((state: RootState) => state.app.counter);
+  const todos = useSelector((state: RootState) => state.app.todos);
+
+  return (
+    <>
+      <Todo todos={todos} addTodo={(newTodo) => dispatch(addTodo(newTodo))} />
+
+      <hr />
+      <p>Count: {counter}</p>
+      <button onClick={() => dispatch(increment())}>increment</button>
+    </>
+  );
+};
+
+export default App;
